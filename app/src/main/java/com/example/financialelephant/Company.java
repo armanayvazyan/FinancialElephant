@@ -49,6 +49,10 @@ class Company implements Parcelable {
         this.attributes = attributes;
     }
 
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
     public String getName() {
         return name;
     }
