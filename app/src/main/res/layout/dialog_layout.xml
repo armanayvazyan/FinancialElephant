@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@drawable/layout_rounded_corners">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Choose Example"
+       android:textSize="25sp"
+       android:id="@+id/chooserText"
+       android:layout_centerHorizontal="true"
+       android:layout_marginTop="15dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:id="@+id/chooserRecView"
+        android:layout_below="@+id/chooserText" />
+
+    <ImageView
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:src="@drawable/ic_arrow_back"
+        android:layout_below="@+id/chooserRecView"
+        android:id="@+id/backBtn"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>
