@@ -6,6 +6,8 @@ import android.content.res.AssetManager;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -37,6 +39,7 @@ public class JsonParser {
         companyList = new ArrayList<>();
         for (int i = 0; i < node.path("companies").size(); i++) {
             String name = node.path("companies").get(i).path("name").asText();
+            String imgUrl = node.path("companies").get(i).path("imgUrl").asText();
             Attribute revenue = new Attribute("revenue", node.path("companies").get(i).path("revenue").asInt());
             Attribute paidUsers = new Attribute("paidusers", node.path("companies").get(i).path("paidusers").asInt());
             Attribute mau = new Attribute("mau", node.path("companies").get(i).path("mau").asInt());
@@ -45,7 +48,7 @@ public class JsonParser {
             ArrayList<Attribute> attributes = new ArrayList<Attribute>();
             Collections.addAll(attributes, revenue, paidUsers, mau, urr, test);
 
-            companyList.add(new Company(name, i + 1, attributes));
+            companyList.add(new Company(name, i + 1, imgUrl,attributes));
         }
     }
 

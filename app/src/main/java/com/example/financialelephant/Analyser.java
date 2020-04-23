@@ -9,8 +9,8 @@ public class Analyser {
         double[][] array2D = new double[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                int first = companies.get(i).getAttribute(attribute);
-                int second = companies.get(j).getAttribute(attribute);
+                int first = companies.get(i).getAttributeValue(attribute);
+                int second = companies.get(j).getAttributeValue(attribute);
 
                 array2D[i][j] = first >= second ? (first == second ? 1 : 1.5) : 0.5;
             }

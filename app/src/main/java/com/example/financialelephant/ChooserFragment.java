@@ -46,43 +46,29 @@ public class ChooserFragment extends Fragment {
 
         initViews(view);
 
-        companiesList = getArguments().getParcelableArrayList("companiesList");
-        attributeList = getArguments().getParcelableArrayList("attributesList");
 
-        companyChooserContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChooserDialog alert = new ChooserDialog();
-                Bundle args = new Bundle();
-                args.putString("ChooserName", chooseCompanyTxt.getText().toString());
-                args.putParcelableArrayList("companiesList",companiesList);
-                alert.showDialog(getActivity(),args);
-                alert.setDataReceiveListener(new CompanyObjectListener() {
-                    @Override
-                    public void onReceiveReady(ArrayList<Company> object) {
-                        companiesList = object;
 
-                    }
-                });
-            }
+        companyChooserContainer.setOnClickListener(v -> {
+            ChooserDialog alert = new ChooserDialog();
+            Bundle args = new Bundle();
+            args.putString("ChooserName", chooseCompanyTxt.getText().toString());
+            args.putParcelableArrayList("companiesList",companiesList);
+            alert.showDialog(getActivity(),args);
+            alert.setDataReceiveListener((CompanyObjectListener) object -> {
+                companiesList = object;
+                listener.onCompanyDataPass(companiesList);
+            });
         });
-
-        attributeChooserContainer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChooserDialog alert = new ChooserDialog();
-                Bundle args = new Bundle();
-                args.putString("ChooserName",chooseAttributesTxt.getText().toString());
-                args.putParcelableArrayList("attributesList",attributeList);
-                alert.showDialog(getActivity(), args);
-                alert.setDataReceiveListener(new AttributebjectListener() {
-                    @Override
-                    public void onReceiveReady(ArrayList<Attribute> object) {
-                        attributeList = object;
-                        listener.onAttributeDataPass(attributeList);
-                    }
-                });
-                }
+        attributeChooserContainer.setOnClickListener(v -> {
+            ChooserDialog alert = new ChooserDialog();
+            Bundle args = new Bundle();
+            args.putString("ChooserName",chooseAttributesTxt.getText().toString());
+            args.putParcelableArrayList("attributesList",attributeList);
+            alert.showDialog(getActivity(), args);
+            alert.setDataReceiveListener((AttributebjectListener) object -> {
+                attributeList = object;
+                listener.onAttributeDataPass(attributeList);
+            });
         });
 
 
@@ -92,9 +78,10 @@ public class ChooserFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         listener = (OnDataPass) context;
-
+        assert getArguments() != null;
+        companiesList = getArguments().getParcelableArrayList("companiesList");
+        attributeList = getArguments().getParcelableArrayList("attributesList");
     }
 
 

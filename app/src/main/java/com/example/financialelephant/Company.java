@@ -9,12 +9,26 @@ class Company implements Parcelable {
     private boolean checked = true;
     private String name;
     private int id;
+    private String imgUrl;
     ArrayList<Attribute> attributes;
+
+    public ArrayList<Attribute> getAttributes() {
+        for (Attribute attribute : attributes) {
+            if(attribute.isChecked())
+                return attributes;
+        }
+        return null;
+    }
+
+    public void setAttributes(ArrayList<Attribute> attributes) {
+        this.attributes = attributes;
+    }
 
     protected Company(Parcel in) {
         checked = in.readByte() != 0;
         name = in.readString();
         id = in.readInt();
+        imgUrl = in.readString();
         attributes = in.createTypedArrayList(Attribute.CREATOR);
     }
 
@@ -34,7 +48,7 @@ class Company implements Parcelable {
         return checked;
     }
 
-    int getAttribute(Attribute attribute) {
+    int getAttributeValue(Attribute attribute) {
         for (Attribute attributes : attributes) {
             if (attributes.name.equals(attribute.name)) {
                 return attributes.value;
@@ -43,11 +57,14 @@ class Company implements Parcelable {
         return 0;
     }
 
-    Company(String name, int id, ArrayList<Attribute> attributes) {
+
+    public Company(String name, int id, String imgUrl, ArrayList<Attribute> attributes) {
         this.name = name;
         this.id = id;
+        this.imgUrl = imgUrl;
         this.attributes = attributes;
     }
+
 
     public void setChecked(boolean checked) {
         this.checked = checked;
@@ -61,6 +78,15 @@ class Company implements Parcelable {
         this.name = name;
     }
 
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -71,6 +97,7 @@ class Company implements Parcelable {
         dest.writeByte((byte) (checked ? 1 : 0));
         dest.writeString(name);
         dest.writeInt(id);
+        dest.writeString(imgUrl);
         dest.writeTypedList(attributes);
     }
 }

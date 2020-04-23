@@ -18,7 +18,7 @@ public class AttributeChooserRecyclerViewAdapter extends RecyclerView.Adapter<At
     private ArrayList<Attribute> attributeArrayList;
     private Context context;
 
-    public AttributeChooserRecyclerViewAdapter(Context context) {
+    AttributeChooserRecyclerViewAdapter(Context context) {
         this.context = context;
     }
 
@@ -37,14 +37,11 @@ public class AttributeChooserRecyclerViewAdapter extends RecyclerView.Adapter<At
             holder.checkBox.setChecked(false);
 
         holder.simpleTxt.setText(attributeArrayList.get(position).getName());
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(holder.checkBox.isChecked()){
-                    attributeArrayList.get(position).setChecked(true);
-                } else
-                    attributeArrayList.get(position).setChecked(false);
-            }
+        holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(holder.checkBox.isChecked()){
+                attributeArrayList.get(position).setChecked(true);
+            } else
+                attributeArrayList.get(position).setChecked(false);
         });
 
     }
@@ -55,23 +52,23 @@ public class AttributeChooserRecyclerViewAdapter extends RecyclerView.Adapter<At
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView simpleTxt;
         CheckBox checkBox;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             simpleTxt = itemView.findViewById(R.id.simpleTxt);
             checkBox = itemView.findViewById(R.id.checkbox);
         }
     }
 
-    public ArrayList<Attribute> getAttributeArrayList() {
+    ArrayList<Attribute> getAttributeArrayList() {
         return attributeArrayList;
     }
 
-    public void setAttributeArrayList(ArrayList<Attribute> attributeArrayList) {
+    void setAttributeArrayList(ArrayList<Attribute> attributeArrayList) {
         this.attributeArrayList = attributeArrayList;
         notifyDataSetChanged();
     }

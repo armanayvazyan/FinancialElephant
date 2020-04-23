@@ -15,8 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class ChooserDialog  {
+class ChooserDialog  {
 
     private ChooserFragment.CompanyObjectListener coListener;
     private ChooserFragment.AttributebjectListener attrListener;
@@ -30,13 +31,15 @@ public class ChooserDialog  {
     private ArrayList<Company> companiesList;
     private ArrayList<Attribute> attributeList;
 
-    public void showDialog(Activity activity, Bundle args) {
+    void showDialog(Activity activity, Bundle args) {
+
 
         Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.dialog_layout);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        Objects.requireNonNull(dialog.getWindow())
+                .setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         initView(dialog);
 
@@ -51,19 +54,17 @@ public class ChooserDialog  {
             getAttributeChooserList(args,dialog);
         }
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(title.contains("Company")){
-                    coListener.onReceiveReady(companiesList);
-                }
-                if(title.contains("Attributes")){
-                    attributeList = attributeAdapter.getAttributeArrayList();
-                    attrListener.onReceiveReady(attributeList);
-
-                }
-                dialog.dismiss();
+        backBtn.setOnClickListener(v -> {
+            if(title.contains("Company")){
+                companiesList = companyAdapter.getCompanyArrayList();
+                coListener.onReceiveReady(companiesList);
             }
+            if(title.contains("Attributes")){
+                attributeList = attributeAdapter.getAttributeArrayList();
+                attrListener.onReceiveReady(attributeList);
+
+            }
+            dialog.dismiss();
         });
 
 
@@ -92,11 +93,11 @@ public class ChooserDialog  {
         chooserRecView.setAdapter(attributeAdapter);
     }
 
-    public void setDataReceiveListener(ChooserFragment.CompanyObjectListener listener){
+    void setDataReceiveListener(ChooserFragment.CompanyObjectListener listener){
         this.coListener = listener;
     }
 
-    public void setDataReceiveListener(ChooserFragment.AttributebjectListener listener){
+    void setDataReceiveListener(ChooserFragment.AttributebjectListener listener){
         this.attrListener = listener;
     }
 

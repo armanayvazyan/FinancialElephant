@@ -2,7 +2,7 @@
   "companies": [
     {
       "name": "Picsart",
-      "imgUrl": "picsart.png",
+      "imgUrl": "picsart",
       "revenue": 100,
       "paidusers": 700,
       "mau": 1,
@@ -11,7 +11,7 @@
     },
     {
       "name": "VSCO",
-      "imgUrl": "vsco.png",
+      "imgUrl": "vsco",
       "revenue": 220,
       "paidusers": 1200,
       "mau": 20,
@@ -20,20 +20,11 @@
     },
     {
       "name": "LightTricks",
-      "imgUrl": "lighttricks.png",
+      "imgUrl": "lighttricks",
       "revenue": 300,
       "paidusers": 300,
       "mau": 13,
       "urr": 30,
-      "test": 10
-    },
-    {
-      "name": "TurboDance",
-      "imgUrl": "lighttricks.png",
-      "revenue": 1000,
-      "paidusers": 1300,
-      "mau": 18,
-      "urr": 90,
       "test": 10
     }
   ],
