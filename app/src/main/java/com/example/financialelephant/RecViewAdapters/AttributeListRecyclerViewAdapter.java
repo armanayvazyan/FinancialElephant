@@ -1,4 +1,4 @@
-package com.example.financialelephant;
+package com.example.financialelephant.RecViewAdapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,15 +8,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.financialelephant.R;
+import com.example.financialelephant.Utilities.Attribute;
+import com.example.financialelephant.Utilities.Company;
+
 import java.util.ArrayList;
 
 public class AttributeListRecyclerViewAdapter extends RecyclerView.Adapter<AttributeListRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<Company> companyArrayList;
     private ArrayList<Attribute> attributeArrayList;
     private Company company;
 
-    public AttributeListRecyclerViewAdapter(Company company) {
+    AttributeListRecyclerViewAdapter(Company company) {
         this.company = company;
     }
 
@@ -55,7 +58,7 @@ public class AttributeListRecyclerViewAdapter extends RecyclerView.Adapter<Attri
         }
     }
 
-    public void setCompanyArrayList(ArrayList<Attribute> attributeArrayList) {
+    void setCompanyArrayList(ArrayList<Attribute> attributeArrayList) {
         notifyDataSetChanged();
         this.attributeArrayList = attributeArrayList;
     }

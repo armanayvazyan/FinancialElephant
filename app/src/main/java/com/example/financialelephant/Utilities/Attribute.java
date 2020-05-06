@@ -1,4 +1,4 @@
-package com.example.financialelephant;
+package com.example.financialelephant.Utilities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,7 +6,7 @@ import android.os.Parcelable;
 public class Attribute implements Parcelable {
     String name;
     int value;
-    boolean checked = true;
+    private boolean checked = true;
 
     protected Attribute(Parcel in) {
         name = in.readString();
@@ -30,7 +30,7 @@ public class Attribute implements Parcelable {
             return value;
         }
 
-        boolean isChecked() {
+        public boolean isChecked() {
             return checked;
         }
 

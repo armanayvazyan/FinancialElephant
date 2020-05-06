@@ -1,9 +1,8 @@
-package com.example.financialelephant;
+package com.example.financialelephant.Activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,28 +10,25 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.financialelephant.Fragments.ChooserFragment;
+import com.example.financialelephant.R;
+import com.example.financialelephant.Utilities.Attribute;
+import com.example.financialelephant.Utilities.Company;
+import com.example.financialelephant.Utilities.JsonParser;
+
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements ChooserFragment.OnDataPass {
-
-    private static final String TAG = "MainActivity";
-
-    private ArrayList<Company> companiesList;
-    private ArrayList<Attribute> attributeList;
 
     private ArrayList<Company> UpdatedCompaniesList;
     private ArrayList<Attribute> UpdatedAttributeList;
 
     private Bundle bundle;
     private Button mainBtn;
-    private Fragment infoCardFragment,chooserFragment;
+    private NavHostFragment finalHost;
 
 
     @SuppressLint("SetTextI18n")
@@ -49,14 +45,12 @@ public class MainActivity extends AppCompatActivity implements ChooserFragment.O
 
         initParsedData();
 
-        infoCardFragment = new InformationViewFragment();
-        chooserFragment = new ChooserFragment();
         mainBtn = findViewById(R.id.mainBtn);
 
-        chooserFragment.setArguments(bundle);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.replacableFragment, chooserFragment, chooserFragment.getClass().getSimpleName())
+        finalHost = NavHostFragment.create(R.navigation.nav_graph,bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content_frame, finalHost)
+                .setPrimaryNavigationFragment(finalHost)
                 .commit();
 
 
@@ -91,12 +85,12 @@ public class MainActivity extends AppCompatActivity implements ChooserFragment.O
         } catch (Exception e) {
             e.printStackTrace();
         }
-        companiesList = parser.getCompaniesList();
-        attributeList = parser.getAttributeList();
+        ArrayList<Company> companiesList = parser.getCompaniesList();
+        ArrayList<Attribute> attributeList = parser.getAttributeList();
 
         bundle = new Bundle();
-        bundle.putParcelableArrayList("companiesList",companiesList);
-        bundle.putParcelableArrayList("attributesList",attributeList);
+        bundle.putParcelableArrayList("companiesList", companiesList);
+        bundle.putParcelableArrayList("attributesList", attributeList);
 
         UpdatedAttributeList = parser.getAttributeList();
         UpdatedCompaniesList = parser.getCompaniesList();
@@ -114,22 +108,18 @@ public class MainActivity extends AppCompatActivity implements ChooserFragment.O
         UpdatedCompaniesList = object;
     }
 
+    @SuppressLint("SetTextI18n")
     void openInfoScreen(){
         Bundle updatedBundle = new Bundle();
         updatedBundle.putParcelableArrayList("updatedCompaniesList", UpdatedCompaniesList);
         updatedBundle.putParcelableArrayList("updatedAttributesList", UpdatedAttributeList);
-        infoCardFragment.setArguments(updatedBundle);
 
         mainBtn.setText("Start to Count");
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.replacableFragment, infoCardFragment, infoCardFragment.getClass().getSimpleName())
-                .commit();
+        finalHost.getNavController().navigate(R.id.action_chooserFragment_to_informationViewFragment,updatedBundle);
     }
-
     void openFinalScreen(){
-        Intent intent = new Intent(MainActivity.this,FinalActivity.class);
+        Intent intent = new Intent(MainActivity.this, FinalActivity.class);
         Bundle updatedBundle = new Bundle();
         updatedBundle.putParcelableArrayList("updatedCompaniesList", UpdatedCompaniesList);
         updatedBundle.putParcelableArrayList("updatedAttributesList", UpdatedAttributeList);

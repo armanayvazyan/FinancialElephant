@@ -1,17 +1,11 @@
-package com.example.financialelephant;
+package com.example.financialelephant.Utilities;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -22,7 +16,7 @@ public class JsonParser {
     private ArrayList<Attribute> attributeList;
     private ArrayList<Company> companyList;
 
-    void convertToJson(Context context) throws IOException {
+    public void convertToJson(Context context) throws IOException {
 
         Reader reader = new InputStreamReader(context.getAssets().open("full_values.json"));
         ObjectMapper mapper = new ObjectMapper();
@@ -45,18 +39,17 @@ public class JsonParser {
             Attribute mau = new Attribute("mau", node.path("companies").get(i).path("mau").asInt());
             Attribute urr = new Attribute("urr", node.path("companies").get(i).path("urr").asInt());
             Attribute test = new Attribute("test", node.path("companies").get(i).path("test").asInt());
-            ArrayList<Attribute> attributes = new ArrayList<Attribute>();
+            ArrayList<Attribute> attributes = new ArrayList<>();
             Collections.addAll(attributes, revenue, paidUsers, mau, urr, test);
-
-            companyList.add(new Company(name, i + 1, imgUrl,attributes));
+            companyList.add(new Company(name, i + 1, imgUrl, attributes));
         }
     }
 
-    ArrayList<Attribute> getAttributeList() {
+    public ArrayList<Attribute> getAttributeList() {
         return attributeList;
     }
 
-    ArrayList<Company> getCompaniesList() {
+    public ArrayList<Company> getCompaniesList() {
         return companyList;
     }
 

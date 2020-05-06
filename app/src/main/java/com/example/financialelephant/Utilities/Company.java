@@ -1,11 +1,11 @@
-package com.example.financialelephant;
+package com.example.financialelephant.Utilities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-class Company implements Parcelable {
+public class Company implements Parcelable {
     private boolean checked = true;
     private String name;
     private int id;
@@ -44,7 +44,7 @@ class Company implements Parcelable {
         }
     };
 
-    boolean isChecked() {
+    public boolean isChecked() {
         return checked;
     }
 

@@ -1,4 +1,4 @@
-package com.example.financialelephant;
+package com.example.financialelephant.RecViewAdapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,11 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.financialelephant.R;
+import com.example.financialelephant.Utilities.Attribute;
+import com.example.financialelephant.Utilities.Company;
 
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ public class InfoCardRecyclerViewAdapter extends RecyclerView.Adapter<InfoCardRe
 
     private ArrayList<Company> companyArrayList;
     private ArrayList<Attribute> attributeArrayList;
-    Context context;
+    private Context context;
 
 
     public InfoCardRecyclerViewAdapter(Context context, ArrayList<Attribute> attributeArrayList) {
@@ -69,10 +71,8 @@ public class InfoCardRecyclerViewAdapter extends RecyclerView.Adapter<InfoCardRe
         notifyDataSetChanged();
         this.companyArrayList = companyArrayList;
     }
-    public int getImage(String imageName) {
-
-        int drawableResourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-        return drawableResourceId;
+    private int getImage(String imageName) {
+        return context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
     }
 
 

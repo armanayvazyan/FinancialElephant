@@ -4,23 +4,26 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.financialelephant.Fragments.ChooserFragment;
+import com.example.financialelephant.RecViewAdapters.AttributeChooserRecyclerViewAdapter;
+import com.example.financialelephant.RecViewAdapters.CompanyChooserRecyclerViewAdapter;
+import com.example.financialelephant.Utilities.Attribute;
+import com.example.financialelephant.Utilities.Company;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
-class ChooserDialog  {
+public class ChooserDialog  {
 
     private ChooserFragment.CompanyObjectListener coListener;
-    private ChooserFragment.AttributebjectListener attrListener;
+    private ChooserFragment.AttributeObjectListener attrListener;
 
     private ImageView backBtn;
     private TextView chooserText;
@@ -31,7 +34,7 @@ class ChooserDialog  {
     private ArrayList<Company> companiesList;
     private ArrayList<Attribute> attributeList;
 
-    void showDialog(Activity activity, Bundle args) {
+    public void showDialog(Activity activity, Bundle args) {
 
 
         Dialog dialog = new Dialog(activity);
@@ -80,7 +83,7 @@ class ChooserDialog  {
     private void getCompanyChooserList(Bundle args,Dialog dialog){
         companiesList = args.getParcelableArrayList("companiesList");
         chooserRecView.setLayoutManager(new LinearLayoutManager(dialog.getContext()));
-        companyAdapter = new CompanyChooserRecyclerViewAdapter(dialog.getContext());
+        companyAdapter = new CompanyChooserRecyclerViewAdapter();
         companyAdapter.setCompanyArrayList(companiesList);
         chooserRecView.setAdapter(companyAdapter);
     }
@@ -88,16 +91,16 @@ class ChooserDialog  {
     private void getAttributeChooserList(Bundle args,Dialog dialog){
         attributeList = args.getParcelableArrayList("attributesList");
         chooserRecView.setLayoutManager(new LinearLayoutManager(dialog.getContext()));
-        attributeAdapter = new AttributeChooserRecyclerViewAdapter(dialog.getContext());
+        attributeAdapter = new AttributeChooserRecyclerViewAdapter();
         attributeAdapter.setAttributeArrayList(attributeList);
         chooserRecView.setAdapter(attributeAdapter);
     }
 
-    void setDataReceiveListener(ChooserFragment.CompanyObjectListener listener){
+    public void setDataReceiveListener(ChooserFragment.CompanyObjectListener listener){
         this.coListener = listener;
     }
 
-    void setDataReceiveListener(ChooserFragment.AttributebjectListener listener){
+    public void setDataReceiveListener(ChooserFragment.AttributeObjectListener listener){
         this.attrListener = listener;
     }
 

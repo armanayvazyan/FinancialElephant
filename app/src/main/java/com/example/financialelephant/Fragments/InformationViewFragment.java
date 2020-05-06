@@ -1,4 +1,4 @@
-package com.example.financialelephant;
+package com.example.financialelephant.Fragments;
 
 import android.os.Bundle;
 
@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+
+import com.example.financialelephant.RecViewAdapters.InfoCardRecyclerViewAdapter;
+import com.example.financialelephant.R;
+import com.example.financialelephant.Utilities.Attribute;
+import com.example.financialelephant.Utilities.Company;
 
 import java.util.ArrayList;
 
@@ -19,9 +23,6 @@ import java.util.ArrayList;
 public class InformationViewFragment extends Fragment {
 
     private RecyclerView cardRecyclerView;
-    private InfoCardRecyclerViewAdapter cardAdapter;
-    private ArrayList<Company> companiesList;
-    private ArrayList<Attribute> attributeList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,11 +32,11 @@ public class InformationViewFragment extends Fragment {
         initViews(view);
 
         assert getArguments() != null;
-        companiesList = getArguments().getParcelableArrayList("updatedCompaniesList");
-        attributeList = getArguments().getParcelableArrayList("updatedAttributesList");
+        ArrayList<Company> companiesList = getArguments().getParcelableArrayList("updatedCompaniesList");
+        ArrayList<Attribute> attributeList = getArguments().getParcelableArrayList("updatedAttributesList");
 
         cardRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        cardAdapter = new InfoCardRecyclerViewAdapter(getActivity(),attributeList);
+        InfoCardRecyclerViewAdapter cardAdapter = new InfoCardRecyclerViewAdapter(getActivity(), attributeList);
         cardAdapter.setCompanyArrayList(companiesList);
         cardRecyclerView.setAdapter(cardAdapter);
 
@@ -47,7 +48,7 @@ public class InformationViewFragment extends Fragment {
     }
 
 
-    void initViews(View view){
+    private void initViews(View view){
         cardRecyclerView = view.findViewById(R.id.cardRecyclerView);
 
     }

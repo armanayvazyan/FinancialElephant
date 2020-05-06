@@ -1,10 +1,10 @@
-package com.example.financialelephant;
+package com.example.financialelephant.Utilities;
 
 import java.util.ArrayList;
 
 public class Analyser {
 
-    static double[] AnaliseWithGivenParameters(ArrayList<Company> companies, Attribute attribute) {
+    public static double[] AnaliseWithGivenParameters(ArrayList<Company> companies, Attribute attribute) {
         int size = companies.size();
         double[][] array2D = new double[size][size];
         for (int i = 0; i < size; i++) {
@@ -48,7 +48,7 @@ public class Analyser {
         return PNRelative;
     }
 
-    static double[] AnaliseWithGivenParameters(ArrayList<Attribute> companies) {
+    public static double[] AnaliseWithGivenParameters(ArrayList<Attribute> companies) {
         int size = companies.size();
         double[][] array2D = new double[size][size];
         for (int i = 0; i < size; i++) {

@@ -1,25 +1,24 @@
-package com.example.financialelephant;
+package com.example.financialelephant.RecViewAdapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.financialelephant.R;
+import com.example.financialelephant.Utilities.Company;
 
 import java.util.ArrayList;
 
 public class CompanyChooserRecyclerViewAdapter extends RecyclerView.Adapter<CompanyChooserRecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<Company> companyArrayList;
-    private Context context;
 
-    CompanyChooserRecyclerViewAdapter(Context context) {
-        this.context = context;
+    public CompanyChooserRecyclerViewAdapter() {
     }
 
     @NonNull
@@ -62,11 +61,11 @@ public class CompanyChooserRecyclerViewAdapter extends RecyclerView.Adapter<Comp
         }
     }
 
-    ArrayList<Company> getCompanyArrayList() {
+    public ArrayList<Company> getCompanyArrayList() {
         return companyArrayList;
     }
 
-    void setCompanyArrayList(ArrayList<Company> companyArrayList) {
+    public void setCompanyArrayList(ArrayList<Company> companyArrayList) {
         this.companyArrayList = companyArrayList;
         notifyDataSetChanged();
     }
