@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
     tools:context=".Fragments.InformationViewFragment"
     tools:ignore="ExtraText"
     android:padding="15dp">
@@ -13,6 +14,7 @@
         android:layout_marginRight="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/colorBackground"
         android:id="@+id/cardRecyclerView"/>
 
 </RelativeLayout>

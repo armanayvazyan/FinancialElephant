@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorLightGrey" format="color"/>
+    <attr name="colorButtonText" format="color"/>
+    <attr name="colorPrimary" format="color"/>
+    <attr name="colorPrimaryDark" format="color"/>
+    <attr name="colorBackground" format="color"/>
+    <attr name="colorInfoBackground" format="color"/>
+    <attr name="colorDialogButtonText" format="color"/>
+</resources>

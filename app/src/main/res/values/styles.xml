@@ -1,11 +1,36 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Theme.MyTheme" parent="Theme.AppCompat.Light">
+        <!-- colorAccent is used as the default value for colorControlActivated,
+             which is used to tint widgets -->
+        <item name="colorAccent">#43975e</item>
+    </style>
+
+    <style name="LightTheme" parent="AppTheme">
+        <item name="colorPrimary">#43975e</item>
+        <item name="colorBackground">#FFFFFF</item>
+        <item name="colorPrimaryDark">#209145</item>
+        <item name="colorInfoBackground">#f4f4f4</item>
+        <item name="colorLightGrey">#ddd</item>
+        <item name="colorButtonText">#FFFFFF</item>
+        <item name="colorDialogButtonText">#2f2f2f</item>
+    </style>
+
+    <style name="DarkTheme" parent="AppTheme">
+        <item name="colorPrimary">#23b65e</item>
+        <item name="colorBackground">#121212</item>
+        <item name="colorInfoBackground">#4a4a4b</item>
+        <item name="colorPrimaryDark">#209145</item>
+        <item name="colorLightGrey">#949497</item>
+        <item name="colorButtonText">#121212</item>
+        <item name="colorDialogButtonText">#D9f4f4f4</item>
     </style>
 
 </resources>

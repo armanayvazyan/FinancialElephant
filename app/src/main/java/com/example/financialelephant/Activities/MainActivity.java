@@ -41,6 +41,16 @@ public class MainActivity extends AppCompatActivity implements ChooserFragment.O
         }
 
         super.onCreate(savedInstanceState);
+
+        switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.DarkTheme);
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.LightTheme);
+                break;
+        }
+
         setContentView(R.layout.activity_main);
 
         initParsedData();
@@ -100,6 +110,10 @@ public class MainActivity extends AppCompatActivity implements ChooserFragment.O
     @Override
     public void onAttributeDataPass(ArrayList<Attribute> object) {
         UpdatedAttributeList = object;
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

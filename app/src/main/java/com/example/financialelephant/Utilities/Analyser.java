@@ -48,13 +48,13 @@ public class Analyser {
         return PNRelative;
     }
 
-    public static double[] AnaliseWithGivenParameters(ArrayList<Attribute> companies) {
-        int size = companies.size();
+    public static double[] AnaliseWithGivenParameters(ArrayList<Attribute> attributes) {
+        int size = attributes.size();
         double[][] array2D = new double[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                int first = companies.get(i).getValue();
-                int second = companies.get(j).getValue();
+                int first = attributes.get(i).getValue();
+                int second = attributes.get(j).getValue();
 
                 array2D[i][j] = first >= second ? (first == second ? 1 : 1.5) : 0.5;
             }
@@ -89,5 +89,41 @@ public class Analyser {
         }
 
         return PNRelative;
+    }
+
+    public static Company analyseData(ArrayList<Company> companiesList, ArrayList<Attribute> attributeList) {
+        double[][] p = new double[attributeList.size()][companiesList.size()];
+        int k = 0;
+        for (Attribute attribute : attributeList) {
+            p[k++] = Analyser.AnaliseWithGivenParameters(companiesList, attribute);
+        }
+
+        double[] pp = Analyser.AnaliseWithGivenParameters(attributeList);
+
+        double[] finalResults = new double[companiesList.size()];
+
+        for (int i = 0; i < companiesList.size(); i++) {
+            finalResults[i] = 0;
+            for (int j = 0; j < attributeList.size(); j++) {
+                finalResults[i] += pp[j] * p[j][i];
+            }
+        }
+        System.out.println("WINNING COMPANY NAME");
+        System.out.println();
+        double max = finalResults[0];
+        for (int i = 0; i < finalResults.length; i++) {
+            if (i > 0) {
+                if (finalResults[i] > max)
+                    max = finalResults[i];
+            }
+        }
+        int index = 0;
+        for (double q : finalResults) {
+            if (q == max) {
+                return companiesList.get(index);
+            } else
+                index++;
+        }
+        return null;
     }
 }

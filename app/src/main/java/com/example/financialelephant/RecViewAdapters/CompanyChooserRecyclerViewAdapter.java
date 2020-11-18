@@ -3,7 +3,7 @@ package com.example.financialelephant.RecViewAdapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,13 +31,13 @@ public class CompanyChooserRecyclerViewAdapter extends RecyclerView.Adapter<Comp
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if(companyArrayList.get(position).isChecked()){
-            holder.checkBox.setChecked(true);
+            holder.aSwitch.setChecked(true);
         } else
-            holder.checkBox.setChecked(false);
+            holder.aSwitch.setChecked(false);
 
         holder.simpleTxt.setText(companyArrayList.get(position).getName());
-        holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(holder.checkBox.isChecked()){
+        holder.aSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(holder.aSwitch.isChecked()){
                 companyArrayList.get(position).setChecked(true);
             } else
                 companyArrayList.get(position).setChecked(false);
@@ -52,12 +52,12 @@ public class CompanyChooserRecyclerViewAdapter extends RecyclerView.Adapter<Comp
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView simpleTxt;
-        CheckBox checkBox;
+        Switch aSwitch;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             simpleTxt = itemView.findViewById(R.id.simpleTxt);
-            checkBox = itemView.findViewById(R.id.checkbox);
+            aSwitch = itemView.findViewById(R.id.checkbox);
         }
     }
 

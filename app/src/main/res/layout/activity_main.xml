@@ -4,34 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="?attr/colorBackground"
     tools:context=".Activities.MainActivity">
 
     <LinearLayout
+        android:id="@+id/mainContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center|bottom"
-        android:orientation="vertical"
-        android:id="@+id/mainContainer">
+        android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="30dp">
-        </FrameLayout>
-
+            android:layout_marginBottom="30dp"></FrameLayout>
 
         <Button
+            android:id="@+id/mainBtn"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:padding="15dp"
-            android:background="@drawable/layout_rounded_corners"
             android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="40dp"
-            android:id="@+id/mainBtn"
-            android:text="Start"/>
-
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/layout_rounded_corners"
+            android:text="Start"
+            android:textColor="?attr/colorButtonText" />
     </LinearLayout>
-
 </RelativeLayout>

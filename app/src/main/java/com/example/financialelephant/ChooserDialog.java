@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +26,7 @@ public class ChooserDialog  {
     private ChooserFragment.CompanyObjectListener coListener;
     private ChooserFragment.AttributeObjectListener attrListener;
 
-    private ImageView backBtn;
+    private Button backBtn;
     private TextView chooserText;
     private RecyclerView chooserRecView;
     private CompanyChooserRecyclerViewAdapter companyAdapter;

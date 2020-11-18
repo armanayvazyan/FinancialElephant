@@ -36,17 +36,26 @@ public class FinalActivity extends AppCompatActivity {
         }
 
         super.onCreate(savedInstanceState);
+
+        switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.DarkTheme);
+                break;
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.LightTheme);
+                break;
+        }
+
         setContentView(R.layout.activity_final);
 
         mediaViewLottie = findViewById(R.id.media_view_lottie);
         winnerCompanyImg = findViewById(R.id.winnerCompanyImg);
         backBtn = findViewById(R.id.backBtn);
 
-
+        mediaViewLottie.bringToFront();
         mediaViewLottie.setAnimationFromUrl("https://cdn130.picsart.com/05451672185558253119.json");
         mediaViewLottie.playAnimation();
         mediaViewLottie.setVisibility(View.VISIBLE);
-
 
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
@@ -54,50 +63,12 @@ public class FinalActivity extends AppCompatActivity {
         companiesList = bundle.getParcelableArrayList("updatedCompaniesList");
         attributeList = bundle.getParcelableArrayList("updatedAttributesList");
 
-
-        Glide.with(this).load(getImage( analyseData().getImgUrl())).into(winnerCompanyImg);
+        Glide.with(this).load(getImage(Analyser.analyseData(companiesList,attributeList).getImgUrl())).into(winnerCompanyImg);
 
         backBtn.setOnClickListener(c->{
             Intent intent1 = new Intent(FinalActivity.this, MainActivity.class);
             startActivity(intent1);
         });
-
-    }
-
-    Company analyseData(){
-        double[][] p = new double[attributeList.size()][companiesList.size()];
-        int k = 0;
-        for (Attribute attribute : attributeList) {
-            p[k++] = Analyser.AnaliseWithGivenParameters(companiesList, attribute);
-        }
-
-        double[] pp = Analyser.AnaliseWithGivenParameters(attributeList);
-
-        double[] finalResults = new double[companiesList.size()];
-
-        for (int i = 0; i < companiesList.size(); i++) {
-            finalResults[i] = 0;
-            for (int j = 0; j < attributeList.size(); j++) {
-                finalResults[i] += pp[j] * p[j][i];
-            }
-        }
-        System.out.println("WINNING COMPANY NAME");
-        System.out.println();
-        double max = finalResults[0];
-        for (int i = 0; i < finalResults.length; i++) {
-            if(i>0){
-                if(finalResults[i] > max)
-                    max = finalResults[i];
-            }
-        }
-        int index =0;
-        for(double q : finalResults){
-            if(q == max){
-                return companiesList.get(index);
-            } else
-                index++;
-        }
-        return null;
     }
 
     public int getImage(String imageName) {

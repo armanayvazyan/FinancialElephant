@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="15dp"
-    android:padding="10dp"
+    android:layout_margin="5dp"
     android:layout_marginTop="30dp"
-    android:layout_margin="5dp">
+    android:padding="10dp"
+    app:cardBackgroundColor="?attr/colorInfoBackground"
+    app:cardCornerRadius="15dp">
 
-        <RelativeLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorInfoBackground"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/companyImg"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="?attr/colorInfoBackground"
+            android:src="@drawable/ic_launcher_background" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/attributeListRecView"
             android:layout_width="match_parent"
+            android:background="?attr/colorInfoBackground"
             android:layout_height="wrap_content"
-            android:padding="20dp">
-
-            <ImageView
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_launcher_background"
-                android:id="@+id/companyImg"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="55dp"
-                android:layout_centerInParent="true"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/attributeListRecView"
-                android:layout_below="@+id/companyImg"/>
-
-
-        </RelativeLayout>
-
-
-
-
+            android:layout_below="@+id/companyImg"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="55dp" />
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>
